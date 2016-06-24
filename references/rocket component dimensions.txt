@@ -1,5 +1,6 @@
 Total height:	5842px	70.00m
-Stage 1:		3460px	41.46m
-Interstage:		1645px	19.71m
-Stage 2:		 578px	 6.93m
-Fairing:		1067px	12.79m
+Stage 1:	3460px	41.46m
+Legs:		 942px	11.29m
+Interstage:	1645px	19.71m
+Stage 2:	 578px	 6.93m
+Fairing:	1067px	12.79m
