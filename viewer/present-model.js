@@ -145,6 +145,16 @@ function start(err, results)
 	controls.position.set(0, -6, 1);
 	controls.updateMatrix();
 	root.add(controls);
+	
+	// hook up controls
+	var button = controls.getChildByName2('MoveUp');
+	button.addEventListener('cursorup', function(){
+		Utils.moveUp();
+	});
+	button = controls.getChildByName2('MoveDown');
+	button.addEventListener('cursorup', function(){
+		Utils.moveDown();
+	});
 
 	// start animating
 	window.requestAnimationFrame(function animate(timestamp)
