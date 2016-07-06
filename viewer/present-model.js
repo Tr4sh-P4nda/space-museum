@@ -64,14 +64,14 @@ function setupRenderer(done)
 	else {
 		// set up preview renderer, in case we're out of world
 		renderer = new THREE.WebGLRenderer();
-		renderer.setSize(1280, 720);
+		renderer.setSize(720, 720);
 		renderer.setClearColor( 0x888888 );
 		document.body.appendChild(renderer.domElement);
 
-		camera = new THREE.PerspectiveCamera(45, 1280/720, 0.01, 10000);
+		camera = new THREE.PerspectiveCamera(45, 1, 0.01, 10000);
 		camera.up.set(0,0,1);
 		camera.position.set(0, -100, 0);
-		camera.lookAt( new THREE.Vector3(0, 0, 0) );
+		camera.lookAt( new THREE.Vector3(0, 0, 35) );
 		root.add(camera);
 	}
 
@@ -125,11 +125,12 @@ function start(err, results)
 
 	// add model to the scene
 	root.add(model);
+
+	// start animating
+	window.requestAnimationFrame(function animate(timestamp)
+	{
+		window.requestAnimationFrame(animate);
+		renderer.render(scene, camera);
+	});
 }
 
-// start animating
-window.requestAnimationFrame(function animate(timestamp)
-{
-	window.requestAnimationFrame(animate);
-	renderer.render(scene, camera);
-});
