@@ -70,7 +70,7 @@ function setupRenderer(done)
 
 		camera = new THREE.PerspectiveCamera(45, 1280/720, 0.01, 10000);
 		camera.up.set(0,0,1);
-		camera.position.set(100, 0, 0);
+		camera.position.set(0, -100, 0);
 		camera.lookAt( new THREE.Vector3(0, 0, 0) );
 		root.add(camera);
 	}
@@ -118,15 +118,18 @@ function start(err, results)
 			mesh.material = materials.stage2;
 	});
 
+	// place rocket
+	model.translateZ(22);
+	model.rotateZ(-Math.PI/2);
+	model.updateMatrix();
+
 	// add model to the scene
 	root.add(model);
-
-	renderer.render(scene, camera);
 }
 
 // start animating
-/*window.requestAnimationFrame(function animate(timestamp)
+window.requestAnimationFrame(function animate(timestamp)
 {
 	window.requestAnimationFrame(animate);
 	renderer.render(scene, camera);
-});*/
+});
