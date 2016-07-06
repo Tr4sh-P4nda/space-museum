@@ -1,7 +1,7 @@
 'use strict';
 
 // set up global variables
-var renderer, camera;
+var renderer, camera, model, controls;
 var scene = new THREE.Scene();
 var root = new THREE.Object3D();
 scene.add(root);
@@ -21,7 +21,7 @@ function loadTextures(done)
 {
 	var texLoader = new THREE.TextureLoader();
 	async.map(
-		['falcon9baked.png', 'stage2baked.png'],
+		['falcon9baked.png', 'stage2baked.png', 'controlpanelbaked.png'],
 
 		function(item, done)
 		{
@@ -49,10 +49,19 @@ function loadTextures(done)
 
 function loadModels(done)
 {
-	var gltfLoader = new THREE.glTFLoader();
-	gltfLoader.load('models/falcon9.gltf', function(obj){
-		done(null, obj.scene.children[0].children[0]);
-	});
+	async.map(
+		['falcon9.gltf', 'controlpanel.gltf'],
+
+		function(item, done)
+		{
+			console.log('loading', item);
+			var gltfLoader = new THREE.glTFLoader();
+			gltfLoader.load('models/'+item, function(obj){
+				done(null, obj.scene.children[0].children[0]);
+			});
+		},
+		done
+	);
 }
 
 
@@ -101,16 +110,17 @@ function start(err, results)
 		console.error(err);
 		return;
 	}
+	console.log(results);
 
 	// texture the model
-	var materials = {stage1: results[0][0], stage2: results[0][1]};
-	var model = results[1];
+	var materials = {stage1: results[0][0], stage2: results[0][1], controlpanel: results[0][2]};
+	model = results[1][0];
 	model.traverse(function(o)
 	{
 		var stage1 = ['Stage1','Engines','Engine_001','Legs','Grid_Fins'];
 		var stage2 = ['Stage2','Engine_2','Fairing','Fairing_001','Payload'];
 
-		var mesh = o.children.filter(function(c){ return c instanceof THREE.Mesh; })[0];
+		var mesh = o.getChildByType(THREE.Mesh);
 
 		if(stage1.indexOf(o.name) > -1)
 			mesh.material = materials.stage1;
@@ -122,14 +132,25 @@ function start(err, results)
 	model.translateZ(22);
 	model.rotateZ(-Math.PI/2);
 	model.updateMatrix();
-
-	// add model to the scene
 	root.add(model);
+
+	// texture the control panel
+	controls = results[1][1];
+	controls.traverse(function(o){
+		if(o instanceof THREE.Mesh)
+			o.material = materials.controlpanel;
+	});
+
+	// place panel
+	controls.position.set(0, -6, 1);
+	controls.updateMatrix();
+	root.add(controls);
 
 	// start animating
 	window.requestAnimationFrame(function animate(timestamp)
 	{
 		window.requestAnimationFrame(animate);
+		scene.updateAllBehaviors();
 		renderer.render(scene, camera);
 	});
 }
