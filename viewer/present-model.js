@@ -93,8 +93,8 @@ function setupEnclosure(done)
 	if(altspace.inClient)
 	{
 		altspace.getEnclosure().then(function(e){
+			root.position.set(32, -151.25, 32);
 			root.scale.multiplyScalar(e.pixelsPerMeter);
-			root.position.setY( -e.innerHeight/2 );
 			root.rotation.set( -Math.PI/2, 0, 0 );
 			done();
 		});
@@ -147,13 +147,24 @@ function start(err, results)
 	root.add(controls);
 	
 	// hook up controls
+	var interval;
+
 	var button = controls.getChildByName2('MoveUp');
-	button.addEventListener('cursorup', function(){
+	button.addEventListener('cursordown', function(){
 		Utils.moveUp();
+		interval = setInterval(Utils.moveUp, 200);
 	});
-	button = controls.getChildByName2('MoveDown');
 	button.addEventListener('cursorup', function(){
+		clearInterval(interval);
+	});
+
+	button = controls.getChildByName2('MoveDown');
+	button.addEventListener('cursordown', function(){
 		Utils.moveDown();
+		interval = setInterval(Utils.moveDown, 200);
+	});
+	button.addEventListener('cursorup', function(){
+		clearInterval(interval);
 	});
 
 	// start animating
