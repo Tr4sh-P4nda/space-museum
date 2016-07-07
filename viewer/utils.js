@@ -117,7 +117,7 @@
 		var newPos = animation ? animation.finalPos.clone() : model.position.clone();
 		newPos.setZ( newPos.z + amt );
 		
-		//if(newPos.z < 50)
+		if(model.name === 'Stage1' && newPos.z < 30)
 			model.addBehavior(new Animate(null, newPos, null, null));
 	}
 	
@@ -128,10 +128,36 @@
 		var newPos = animation ? animation.finalPos.clone() : model.position.clone();
 		newPos.setZ( newPos.z - amt );
 		
-		//if(newPos.z > -20)
+		if(model.name === 'Stage1' && newPos.z > -40)
 			model.addBehavior(new Animate(null, newPos, null, null));
 	}
 	
+	function focusStage1()
+	{
+		// position stage 1
+		stage1.traverse(function(o){ o.visible = true; });
+		stage1.addBehavior(new Animate(root,
+			new THREE.Vector3(0,0,22),
+			new THREE.Quaternion(0, 0, -0.38268343372150415, 0.923879526523784)
+		));
+
+		// position stage 2
+		stage2.addBehavior(new Animate(stage1,
+			new THREE.Vector3(0,0,24.165),
+			new THREE.Quaternion()
+		));
+	}
+
+	function focusStage2()
+	{
+		
+	}
+
+	function focusStage3()
+	{
+		
+	}
+
 	exports.Animate = Animate;
 	exports.moveUp = moveUp;
 	exports.moveDown = moveDown;
