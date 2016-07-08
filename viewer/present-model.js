@@ -163,6 +163,7 @@ function start(err, results)
 		clearInterval(interval);
 	}
 
+	// move up
 	var button = controls.getChildByName2('MoveUp');
 	button.addEventListener('cursordown', function(){
 		Utils.moveUp();
@@ -171,6 +172,7 @@ function start(err, results)
 	button.addEventListener('cursorup', buttonup);
 	button.addEventListener('cursorleave', buttonup);
 
+	// move down
 	button = controls.getChildByName2('MoveDown');
 	button.addEventListener('cursordown', function(){
 		Utils.moveDown();
@@ -178,6 +180,18 @@ function start(err, results)
 	});
 	button.addEventListener('cursorup', buttonup);
 	button.addEventListener('cursorleave', buttonup);
+
+	// stage 1
+	button = controls.getChildByName2('Stage1');
+	button.addEventListener('cursorup', Utils.focusStage1);
+
+	// stage 2
+	button = controls.getChildByName2('Stage2');
+	button.addEventListener('cursorup', Utils.focusStage2);
+
+	// stage 3
+	button = controls.getChildByName2('Stage3');
+	button.addEventListener('cursorup', Utils.focusStage3);
 
 	// start animating
 	window.requestAnimationFrame(function animate(timestamp)
