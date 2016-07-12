@@ -16,11 +16,6 @@
 				return this.children[i];
 	}
 
-	/*
-	 * Animate the target from transform to transform over time
-	 * Alternate prototype: Animate(finalMatrix, duration, callback)
-	 */
-
 	function reparent(obj, parent)
 	{
 		// shuffle hierarchy, but keep world transform the same

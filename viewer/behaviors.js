@@ -34,7 +34,7 @@
 			this.finalScale = finalScale;
 		}
 		this.parent = finalParent || null;
-		this.duration = duration || 600;
+		this.duration = duration || 1000;
 		this.callback = callback;
 	}
 

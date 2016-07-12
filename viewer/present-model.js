@@ -31,7 +31,7 @@ function loadTextures(done)
 
 				// and return it if successful
 				function(tex){
-					done(null, new THREE.MeshBasicMaterial({map: tex}));
+					done(null, new THREE.MeshBasicMaterial({map: tex, side: THREE.DoubleSide}));
 				},
 				null,
 
