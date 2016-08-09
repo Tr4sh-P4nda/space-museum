@@ -7,6 +7,12 @@ var scene = new THREE.Scene();
 var root = new THREE.Object3D();
 scene.add(root);
 
+var infoRoot = new THREE.Object3D();
+/*var temp = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial({color:0xffcccc}));
+temp.position.set(0,0,0.5);
+infoRoot.add(temp);*/
+scene.add(infoRoot);
+
 // start loading everything in the right order
 async.parallel(
 	[
@@ -96,10 +102,15 @@ function setupEnclosure(done)
 {
 	if(altspace.inClient)
 	{
-		altspace.getEnclosure().then(function(e){
+		altspace.getEnclosure().then(function(e)
+		{
 			root.position.set(32, -151.25, 32);
 			root.scale.multiplyScalar(e.pixelsPerMeter);
 			root.rotation.set( -Math.PI/2, 0, 0 );
+
+			infoRoot.position.set(-59, -176, 203);
+			infoRoot.scale.multiplyScalar(e.pixelsPerMeter);
+			infoRoot.rotation.set( -Math.PI/2, 0, 0 );
 			done();
 		});
 	}
@@ -144,6 +155,14 @@ function start(err, results)
 	model.rotateZ(-Math.PI/2);
 	model.updateMatrix();
 	root.add(model);
+
+	// place display rocket
+	var scaleModel = model.clone();
+	scaleModel.scale.set(.04, .04, .04);
+	scaleModel.position.set(0, 0, 1);
+	scaleModel.rotateZ(-Math.PI/2);
+	scaleModel.updateMatrix();
+	infoRoot.add(scaleModel);
 
 	// texture the control panel
 	controls = results[1][1];
