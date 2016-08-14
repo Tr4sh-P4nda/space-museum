@@ -34,7 +34,8 @@ function loadTextures(done)
 			'controlpanelbaked.png',
 			'overview.png',
 			'first.png',
-			'second.png'
+			'second.png',
+			'arrow.png'
 		],
 
 		function(item, done)
@@ -141,7 +142,8 @@ function start(err, results)
 		controlpanel: results[0][2],
 		infoOverview: results[0][3],
 		infoFirst: results[0][4],
-		infoSecond: results[0][5]
+		infoSecond: results[0][5],
+		infoArrow: results[0][6]
 	};
 	model = results[1][0];
 	model.traverse(function(o)
@@ -180,6 +182,8 @@ function start(err, results)
 	infoRoot.add(scaleModel);
 
 	addInfoPanels(materials);
+
+	addArrows(materials);
 
 	// texture the control panel
 	controls = results[1][1];
@@ -257,7 +261,6 @@ function addInfoPanels(materials)
 	firstPanel.position.set(0, -1, 1.5);
 	firstPanel.rotation.set(1.5699, 1.5701, 0);
 	firstPanel.scale.set(1, 1.2, 1);
-	editor.edit(firstPanel);
 	infoRoot.add(firstPanel);
 
 	var secondPanel = new THREE.Mesh(
@@ -268,4 +271,70 @@ function addInfoPanels(materials)
 	secondPanel.rotation.set(3.141, 1.047, -1.5707);
 	secondPanel.scale.set(1, 1.2, 1);
 	infoRoot.add(secondPanel);
+}
+
+function addArrows(materials)
+{
+	materials.infoArrow.map.wrapS = THREE.RepeatWrapping;
+	materials.infoArrow.map.repeat.y = 5;
+	materials.infoArrow.transparent = true;
+	var arrows1 = new THREE.Mesh(
+		new THREE.PlaneGeometry(1, 1),
+		materials.infoArrow
+	);
+	arrows1.name = 'arrows1';
+	arrows1.position.set(0, -176.4, 170);
+	arrows1.rotation.set(-1.5707962827705675, 0, -2.0943951617841434);
+	arrows1.scale.set(5, 25, 10);
+	scene.add(arrows1);
+
+	var arrows2 = new THREE.Mesh(
+		new THREE.PlaneGeometry(1, 1),
+		materials.infoArrow
+	);
+	arrows2.name = 'arrows2';
+	arrows2.position.set(35, -176.2, 172);
+	arrows2.rotation.set(-1.5707963484304415, 3.8192581541807165e-8, 0);
+	arrows2.scale.set(5, 25, 10);
+	scene.add(arrows2);
+
+	var arrows3 = new THREE.Mesh(
+		new THREE.PlaneGeometry(1, 1),
+		materials.infoArrow
+	);
+	arrows3.name = 'arrows3';
+	arrows3.position.set(60, -166.3, 135);
+	arrows3.rotation.set(-1.5707962886023292, 2.163553780576422e-8, -1.570796395844246);
+	arrows3.scale.set(5, 25, 10);
+	scene.add(arrows3);
+
+	var arrows4 = new THREE.Mesh(
+		new THREE.PlaneGeometry(1, 1),
+		materials.infoArrow
+	);
+	arrows4.name = 'arrows4';
+	arrows4.position.set(110, -161.1, 135);
+	arrows4.rotation.set(-1.5707962900545052, -0.3490657666126316, -1.5707964138930883);
+	arrows4.scale.set(5, 25, 10);
+	scene.add(arrows4);
+
+	var arrows5 = new THREE.Mesh(
+		new THREE.PlaneGeometry(1, 1),
+		materials.infoArrow
+	);
+	arrows5.name = 'arrows5';
+	arrows5.position.set(110, -151.1, 118);
+	arrows5.rotation.set(-1.5707963561444291, -1.2774839319718047e-7, 1.5707963267948966);
+	arrows5.scale.set(5, 25, 10);
+	scene.add(arrows5);
+
+	var arrows6 = new THREE.Mesh(
+		new THREE.PlaneGeometry(1, 1),
+		materials.infoArrow
+	);
+	arrows6.name = 'arrows6';
+	arrows6.position.set(75, -151.1, 113);
+	arrows6.rotation.set(-1.570796394526992, -1.0028011132590126e-7, 1.2217304725064826);
+	arrows6.scale.set(5, 25, 10);
+	scene.add(arrows6);
 }
