@@ -257,7 +257,6 @@ function addInfoPanels(materials)
 	firstPanel.position.set(0, -1, 1.5);
 	firstPanel.rotation.set(1.5699, 1.5701, 0);
 	firstPanel.scale.set(1, 1.2, 1);
-	editor.edit(firstPanel);
 	infoRoot.add(firstPanel);
 
 	var secondPanel = new THREE.Mesh(
