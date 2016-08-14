@@ -28,7 +28,14 @@ function loadTextures(done)
 {
 	var texLoader = new THREE.TextureLoader();
 	async.map(
-		['falcon9baked.png', 'stage2baked.png', 'controlpanelbaked.png'],
+		[
+			'falcon9baked.png',
+			'stage2baked.png',
+			'controlpanelbaked.png',
+			'overview.png',
+			'first.png',
+			'second.png'
+		],
 
 		function(item, done)
 		{
@@ -108,7 +115,7 @@ function setupEnclosure(done)
 			root.scale.multiplyScalar(e.pixelsPerMeter);
 			root.rotation.set( -Math.PI/2, 0, 0 );
 
-			infoRoot.position.set(-59, -176, 203);
+			infoRoot.position.set(-38, -176, 203);
 			infoRoot.scale.multiplyScalar(e.pixelsPerMeter);
 			infoRoot.rotation.set( -Math.PI/2, 0, 0 );
 			done();
@@ -128,7 +135,14 @@ function start(err, results)
 	console.log(results);
 
 	// texture the model
-	var materials = {stage1: results[0][0], stage2: results[0][1], controlpanel: results[0][2]};
+	var materials = {
+		stage1: results[0][0],
+		stage2: results[0][1], 
+		controlpanel: results[0][2],
+		infoOverview: results[0][3],
+		infoFirst: results[0][4],
+		infoSecond: results[0][5]
+	};
 	model = results[1][0];
 	model.traverse(function(o)
 	{
@@ -158,11 +172,14 @@ function start(err, results)
 
 	// place display rocket
 	var scaleModel = model.clone();
-	scaleModel.scale.set(.04, .04, .04);
-	scaleModel.position.set(0, 0, 1);
+	scaleModel.name = 'scaleModel';
+	scaleModel.scale.set(.08, .08, .08);
+	scaleModel.position.set(0, 0, 1.6);
 	scaleModel.rotateZ(-Math.PI/2);
 	scaleModel.updateMatrix();
 	infoRoot.add(scaleModel);
+
+	addInfoPanels(materials);
 
 	// texture the control panel
 	controls = results[1][1];
@@ -221,3 +238,34 @@ function start(err, results)
 	});
 }
 
+
+function addInfoPanels(materials) 
+{
+	var overviewPanel = new THREE.Mesh(
+		new THREE.PlaneGeometry(1, 1),
+		materials.infoOverview
+	);
+	overviewPanel.position.set(1, 0, 0.5);
+	overviewPanel.rotation.set(0, 0.872, 1.57);
+	overviewPanel.scale.set(2.5, 0.7, 1);
+	infoRoot.add(overviewPanel);
+
+	var firstPanel = new THREE.Mesh(
+		new THREE.PlaneGeometry(1, 1),
+		materials.infoFirst
+	);
+	firstPanel.position.set(0, -1, 1.5);
+	firstPanel.rotation.set(1.5699, 1.5701, 0);
+	firstPanel.scale.set(1, 1.2, 1);
+	editor.edit(firstPanel);
+	infoRoot.add(firstPanel);
+
+	var secondPanel = new THREE.Mesh(
+		new THREE.PlaneGeometry(1, 1),
+		materials.infoSecond
+	);
+	secondPanel.position.set(0, 1, 3.2);
+	secondPanel.rotation.set(3.141, 1.047, -1.5707);
+	secondPanel.scale.set(1, 1.2, 1);
+	infoRoot.add(secondPanel);
+}
