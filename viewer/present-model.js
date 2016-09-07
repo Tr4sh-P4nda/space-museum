@@ -153,10 +153,10 @@ function start(err, results)
 
 		var mesh = o.getChildByType(THREE.Mesh);
 
-		if(stage1names.indexOf(o.name) > -1)
+		/*if(stage1names.indexOf(o.name) > -1)
 			mesh.material = materials.stage1;
 		else if(stage2names.indexOf(o.name) > -1)
-			mesh.material = materials.stage2;
+			mesh.material = materials.stage2;*/
 
 		switch(o.name){
 			case 'Stage1': stage1 = o; break;

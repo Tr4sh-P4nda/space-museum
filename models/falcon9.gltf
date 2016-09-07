@@ -632,130 +632,67 @@
             "uri": "falcon9.bin"
         }
     },
+    "extensionsUsed": [
+        "KHR_materials_common"
+    ],
+    "images": {
+        "falcon9baked_png": {
+            "name": "falcon9baked_png",
+            "uri": "../textures/falcon9baked.png"
+        },
+        "stage2baked_png": {
+            "name": "stage2baked_png",
+            "uri": "../textures/stage2baked.png"
+        }
+    },
     "materials": {
         "Metal-effect": {
-            "name": "Metal",
-            "technique": "technique0",
-            "values": {
-                "ambient": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "diffuse": [
-                    0.64,
-                    0.64,
-                    0.64,
-                    1
-                ],
-                "emission": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "shininess": 50,
-                "specular": [
-                    0.5,
-                    0.5,
-                    0.5,
-                    1
-                ]
-            }
+            "extensions": {
+                "KHR_materials_common": {
+                    "technique": "CONSTANT",
+					"doubleSided": true,
+                    "values": {
+                        "diffuse": "texture_falcon9baked_png"
+                    }
+                }
+            },
+            "name": "Metal"
         },
         "Metal_001-effect": {
-            "name": "Metal_001",
-            "technique": "technique0",
-            "values": {
-                "ambient": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "diffuse": [
-                    0.64,
-                    0.64,
-                    0.64,
-                    1
-                ],
-                "emission": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "shininess": 50,
-                "specular": [
-                    0.5,
-                    0.5,
-                    0.5,
-                    1
-                ]
-            }
+            "extensions": {
+                "KHR_materials_common": {
+                    "technique": "CONSTANT",
+					"doubleSided": true,
+                    "values": {
+                        "diffuse": "texture_stage2baked_png"
+                    }
+                }
+            },
+            "name": "Metal_001"
         },
         "Stage1-effect": {
-            "name": "Stage1",
-            "technique": "technique0",
-            "values": {
-                "ambient": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "diffuse": [
-                    0.64,
-                    0.64,
-                    0.64,
-                    1
-                ],
-                "emission": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "shininess": 50,
-                "specular": [
-                    0.5,
-                    0.5,
-                    0.5,
-                    1
-                ]
-            }
+            "extensions": {
+                "KHR_materials_common": {
+                    "technique": "CONSTANT",
+					"doubleSided": true,
+                    "values": {
+                        "diffuse": "texture_falcon9baked_png"
+                    }
+                }
+            },
+            "name": "Stage1"
         },
         "Stage2-effect": {
-            "name": "Stage2",
-            "technique": "technique0",
-            "values": {
-                "ambient": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "diffuse": [
-                    0.64,
-                    0.64,
-                    0.64,
-                    1
-                ],
-                "emission": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "shininess": 50,
-                "specular": [
-                    0.5,
-                    0.5,
-                    0.5,
-                    1
-                ]
-            }
+            "extensions": {
+                "KHR_materials_common": {
+                    "technique": "CONSTANT",
+					"doubleSided": true,
+                    "values": {
+                        "diffuse": "texture_stage2baked_png"
+                    }
+                }
+            },
+            "name": "Stage2"
         }
     },
     "meshes": {
@@ -961,9 +898,32 @@
             ],
             "name": "Engine_2"
         },
+        "Engine_Axis": {
+            "children": [],
+            "matrix": [
+                0.707107,
+                -0.707107,
+                0,
+                0,
+                0.707107,
+                0.707107,
+                -1.42109e-14,
+                0,
+                7.10543e-15,
+                0,
+                1,
+                0,
+                1.22876,
+                -0.508969,
+                0,
+                1
+            ],
+            "name": "Engine_Axis"
+        },
         "Engines": {
             "children": [
-                "Engine_001"
+                "Engine_001",
+                "Engine_Axis"
             ],
             "matrix": [
                 1,
@@ -1063,6 +1023,50 @@
             ],
             "name": "Grid_Fins"
         },
+        "Grid_Fins_Axis": {
+            "children": [],
+            "matrix": [
+                -5.96046e-08,
+                1,
+                0,
+                0,
+                -1,
+                -5.96046e-08,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                -1.89616,
+                0,
+                13.2764,
+                1
+            ],
+            "name": "Grid_Fins_Axis"
+        },
+        "Leg_Axis": {
+            "children": [],
+            "matrix": [
+                -5.96046e-08,
+                1,
+                0,
+                0,
+                -1,
+                -5.96046e-08,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                -1.41678,
+                0,
+                -20.3312,
+                1
+            ],
+            "name": "Leg_Axis"
+        },
         "Legs": {
             "children": [],
             "matrix": [
@@ -1118,7 +1122,9 @@
                 "Engines",
                 "Stage2",
                 "Legs",
-                "Grid_Fins"
+                "Leg_Axis",
+                "Grid_Fins",
+                "Grid_Fins_Axis"
             ],
             "matrix": [
                 0.707107,
@@ -1173,7 +1179,7 @@
             ],
             "name": "Stage2"
         },
-        "node_10": {
+        "node_13": {
             "children": [
                 "Stage1"
             ],
@@ -1198,95 +1204,39 @@
             "name": "Y_UP_Transform"
         }
     },
-    "programs": {
-        "program_0": {
-            "attributes": [
-                "a_normal",
-                "a_position"
-            ],
-            "fragmentShader": "falcon90FS",
-            "vertexShader": "falcon90VS"
+    "samplers": {
+        "sampler_0": {
+            "magFilter": 9729,
+            "minFilter": 9729,
+            "wrapS": 10497,
+            "wrapT": 10497
         }
     },
     "scene": "defaultScene",
     "scenes": {
         "defaultScene": {
             "nodes": [
-                "node_10"
+                "node_13"
             ]
         }
     },
-    "shaders": {
-        "falcon90FS": {
-            "type": 35632,
-            "uri": "falcon90FS.glsl"
-        },
-        "falcon90VS": {
-            "type": 35633,
-            "uri": "falcon90VS.glsl"
-        }
-    },
     "skins": {},
-    "techniques": {
-        "technique0": {
-            "attributes": {
-                "a_normal": "normal",
-                "a_position": "position"
-            },
-            "parameters": {
-                "ambient": {
-                    "type": 35666
-                },
-                "diffuse": {
-                    "type": 35666
-                },
-                "emission": {
-                    "type": 35666
-                },
-                "modelViewMatrix": {
-                    "semantic": "MODELVIEW",
-                    "type": 35676
-                },
-                "normal": {
-                    "semantic": "NORMAL",
-                    "type": 35665
-                },
-                "normalMatrix": {
-                    "semantic": "MODELVIEWINVERSETRANSPOSE",
-                    "type": 35675
-                },
-                "position": {
-                    "semantic": "POSITION",
-                    "type": 35665
-                },
-                "projectionMatrix": {
-                    "semantic": "PROJECTION",
-                    "type": 35676
-                },
-                "shininess": {
-                    "type": 5126
-                },
-                "specular": {
-                    "type": 35666
-                }
-            },
-            "program": "program_0",
-            "states": {
-                "enable": [
-                    2929,
-                    2884
-                ]
-            },
-            "uniforms": {
-                "u_ambient": "ambient",
-                "u_diffuse": "diffuse",
-                "u_emission": "emission",
-                "u_modelViewMatrix": "modelViewMatrix",
-                "u_normalMatrix": "normalMatrix",
-                "u_projectionMatrix": "projectionMatrix",
-                "u_shininess": "shininess",
-                "u_specular": "specular"
-            }
+    "textures": {
+        "texture_falcon9baked_png": {
+            "format": 6408,
+            "internalFormat": 6408,
+            "sampler": "sampler_0",
+            "source": "falcon9baked_png",
+            "target": 3553,
+            "type": 5121
+        },
+        "texture_stage2baked_png": {
+            "format": 6408,
+            "internalFormat": 6408,
+            "sampler": "sampler_0",
+            "source": "stage2baked_png",
+            "target": 3553,
+            "type": 5121
         }
     }
 }
