@@ -452,37 +452,26 @@
             "uri": "controlpanel.bin"
         }
     },
+    "extensionsUsed": [
+        "KHR_materials_common"
+    ],
+    "images": {
+        "controlpanelbaked_png": {
+            "name": "controlpanelbaked_png",
+            "uri": "../textures/controlpanelbaked.png"
+        }
+    },
     "materials": {
         "Surface-effect": {
-            "name": "Surface",
-            "technique": "technique0",
-            "values": {
-                "ambient": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "diffuse": [
-                    0.64,
-                    0.64,
-                    0.64,
-                    1
-                ],
-                "emission": [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "shininess": 50,
-                "specular": [
-                    0.5,
-                    0.5,
-                    0.5,
-                    1
-                ]
-            }
+            "extensions": {
+                "KHR_materials_common": {
+                    "technique": "CONSTANT",
+                    "values": {
+                        "diffuse": "texture_controlpanelbaked_png"
+                    }
+                }
+            },
+            "name": "Surface"
         }
     },
     "meshes": {
@@ -800,14 +789,12 @@
             "name": "Y_UP_Transform"
         }
     },
-    "programs": {
-        "program_0": {
-            "attributes": [
-                "a_normal",
-                "a_position"
-            ],
-            "fragmentShader": "controlpanel0FS",
-            "vertexShader": "controlpanel0VS"
+    "samplers": {
+        "sampler_0": {
+            "magFilter": 9729,
+            "minFilter": 9729,
+            "wrapS": 10497,
+            "wrapT": 10497
         }
     },
     "scene": "defaultScene",
@@ -818,77 +805,15 @@
             ]
         }
     },
-    "shaders": {
-        "controlpanel0FS": {
-            "type": 35632,
-            "uri": "controlpanel0FS.glsl"
-        },
-        "controlpanel0VS": {
-            "type": 35633,
-            "uri": "controlpanel0VS.glsl"
-        }
-    },
     "skins": {},
-    "techniques": {
-        "technique0": {
-            "attributes": {
-                "a_normal": "normal",
-                "a_position": "position"
-            },
-            "parameters": {
-                "ambient": {
-                    "type": 35666
-                },
-                "diffuse": {
-                    "type": 35666
-                },
-                "emission": {
-                    "type": 35666
-                },
-                "modelViewMatrix": {
-                    "semantic": "MODELVIEW",
-                    "type": 35676
-                },
-                "normal": {
-                    "semantic": "NORMAL",
-                    "type": 35665
-                },
-                "normalMatrix": {
-                    "semantic": "MODELVIEWINVERSETRANSPOSE",
-                    "type": 35675
-                },
-                "position": {
-                    "semantic": "POSITION",
-                    "type": 35665
-                },
-                "projectionMatrix": {
-                    "semantic": "PROJECTION",
-                    "type": 35676
-                },
-                "shininess": {
-                    "type": 5126
-                },
-                "specular": {
-                    "type": 35666
-                }
-            },
-            "program": "program_0",
-            "states": {
-                "enable": [
-                    2929,
-                    2884
-                ]
-            },
-            "uniforms": {
-                "u_ambient": "ambient",
-                "u_diffuse": "diffuse",
-                "u_emission": "emission",
-                "u_modelViewMatrix": "modelViewMatrix",
-                "u_normalMatrix": "normalMatrix",
-                "u_projectionMatrix": "projectionMatrix",
-                "u_shininess": "shininess",
-                "u_specular": "specular"
-            }
+    "textures": {
+        "texture_controlpanelbaked_png": {
+            "format": 6408,
+            "internalFormat": 6408,
+            "sampler": "sampler_0",
+            "source": "controlpanelbaked_png",
+            "target": 3553,
+            "type": 5121
         }
     }
 }
