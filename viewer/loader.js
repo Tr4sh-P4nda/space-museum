@@ -1,11 +1,11 @@
 'use strict';
 
-(function()
+(function(exports)
 {
 	var modelCache = {};
 	var textureCache = {};
 
-	// loads an asset manifest from a scene
+	// loads an asset manifest from a vignette
 	function loadAssets(manifest, callback)
 	{
 		var waiting = 0;
@@ -78,6 +78,12 @@
 
 							// finish
 							checkComplete(true);
+						},
+						null,
+						function(err)
+						{
+							console.error(err);
+							checkComplete(true);
 						}
 					);
 				}
@@ -97,6 +103,6 @@
 
 	
 
-	window.loadModule = loadModule;
+	exports.loadAssets = loadAssets;
 
-})();
+})(window.Diorama = window.Diorama || {});

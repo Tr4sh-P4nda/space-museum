@@ -2,24 +2,17 @@
 
 (function(exports)
 {
-	exports.name = 'real_rocket';
-
 	var stage1, stage2, fairing1, fairing2;
 
 	exports.initialize = function(root, assets)
 	{
-		var rocket = assets.rocket;
+		var rocket = assets.models.rocket;
 		rocket.traverse(function(o)
 		{
 			var stage1names = ['Stage1','Engines','Engine_001','Legs','Grid_Fins'];
 			var stage2names = ['Stage2','Engine_2','Fairing','Fairing_001','Payload'];
 
 			var mesh = o.getChildByType(THREE.Mesh);
-
-			/*if(stage1names.indexOf(o.name) > -1)
-				mesh.material = materials.stage1;
-			else if(stage2names.indexOf(o.name) > -1)
-				mesh.material = materials.stage2;*/
 
 			switch(o.name){
 				case 'Stage1': stage1 = o; break;
@@ -36,9 +29,8 @@
 		root.add(rocket);
 
 
-
 		// place panel
-		var controls = assets.controlpanel;
+		var controls = assets.models.controlpanel;
 		controls.position.set(0, -6, 1);
 		controls.updateMatrix();
 		root.add(controls);
@@ -88,4 +80,4 @@
 		}
 	};
 
-})(window.real_rocket = window.real_rocket || {});
+})(window.Diorama.real_rocket = window.Diorama.real_rocket || {});

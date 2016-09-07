@@ -1,162 +1,73 @@
 'use strict';
 
 // set up global variables
-var renderer, camera, model, controls;
+var renderer, camera, scaleFactor;
 var scene = new THREE.Scene();
-var root = new THREE.Object3D();
-scene.add(root);
 
-var infoRoot = new THREE.Object3D();
-/*var temp = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial({color:0xffcccc}));
-temp.position.set(0,0,0.5);
-infoRoot.add(temp);*/
-scene.add(infoRoot);
-
-// start loading everything in the right order
-async.parallel(
-	[
-		loadTextures,
-		loadModels,
-		setupRenderer,
-		setupEnclosure
-	],
-	start
-);
-
-function loadTextures(done)
+// set up renderer and scale
+if(altspace.inClient)
 {
-	var texLoader = new THREE.TextureLoader();
-	async.map(
-		[
-			'falcon9baked.png',
-			'stage2baked.png',
-			'controlpanelbaked.png',
-			'overview.png',
-			'first.png',
-			'second.png',
-			'arrow.png'
-		],
+	renderer = altspace.getThreeJSRenderer();
+	altspace.getEnclosure().then(function(e){
+		scaleFactor = e.pixelsPerMeter;
+		start();
+	});
+}
+else
+{
+	// set up preview renderer, in case we're out of world
+	renderer = new THREE.WebGLRenderer();
+	renderer.setSize(720, 720);
+	renderer.setClearColor( 0x888888 );
+	document.body.appendChild(renderer.domElement);
 
-		function(item, done)
-		{
-			// load each texture
-			texLoader.load('textures/'+item,
+	camera = new THREE.PerspectiveCamera(90, 1, 0.01, 10000);
+	camera.position.set(0, -10, 1.5);
+	camera.rotation.set(2.15, 0, 0);
+	scene.add(camera);
 
-				// and return it if successful
-				function(tex){
-					done(null, new THREE.MeshBasicMaterial({map: tex, side: THREE.DoubleSide}));
-				},
-				null,
+	// set up cursor emulation
+	altspace.utilities.shims.cursor.init(scene, camera, {renderer: renderer});
 
-				// otherwise return the error
-				function(xhr){
-					done(xhr.statusText);
-				}
-			);
-		},
+	// don't change scale
+	scaleFactor = 1;
 
-		// finish once all textures are loaded
-		done
-	);
+	start();
 }
 
 
-function loadModels(done)
+function start()
 {
-	async.map(
-		['falcon9.gltf', 'controlpanel.gltf'],
+	// set up full-size rocket root
+	var realRoot = new THREE.Object3D();
+	realRoot.position.set(32, -151.25, 32);
+	realRoot.rotation.set(-Math.PI/2, 0, 0);
+	realRoot.scale.multiplyScalar(scaleFactor);
+	scene.add(realRoot);
 
-		function(item, done)
-		{
-			console.log('loading', item);
-			var gltfLoader = new THREE.glTFLoader();
-			gltfLoader.load('models/'+item, function(obj){
-				done(null, obj.scene.children[0].children[0]);
-			});
-		},
-		done
-	);
-}
+	// set up scale rocket root
+	var scaleRoot = new THREE.Object3D();
+	scaleRoot.position.set(-38, -176, 203);
+	scaleRoot.rotation.set( -Math.PI/2, 0, 0 );
+	scaleRoot.scale.multiplyScalar(scaleFactor);
+	scene.add(scaleRoot);
 
-
-function setupRenderer(done)
-{
-	if(altspace.inClient){
-		renderer = altspace.getThreeJSRenderer();
-	}
-	else {
-		// set up preview renderer, in case we're out of world
-		renderer = new THREE.WebGLRenderer();
-		renderer.setSize(720, 720);
-		renderer.setClearColor( 0x888888 );
-		document.body.appendChild(renderer.domElement);
-
-		camera = new THREE.PerspectiveCamera(90, 1, 0.01, 10000);
-		camera.up.set(0,0,1);
-		camera.position.set(0, -10, 1.5);
-		camera.rotation.set(2.15, 0, 0);
-		root.add(camera);
-
-		// set up cursor emulation
-		altspace.utilities.shims.cursor.init(scene, camera, {renderer: renderer});
-	}
-
-	done();
-}
-
-
-function setupEnclosure(done)
-{
-	if(altspace.inClient)
-	{
-		altspace.getEnclosure().then(function(e)
-		{
-			root.position.set(32, -151.25, 32);
-			root.scale.multiplyScalar(e.pixelsPerMeter);
-			root.rotation.set( -Math.PI/2, 0, 0 );
-
-			infoRoot.position.set(-38, -176, 203);
-			infoRoot.scale.multiplyScalar(e.pixelsPerMeter);
-			infoRoot.rotation.set( -Math.PI/2, 0, 0 );
-			done();
-		});
-	}
-	else {
-		done();
-	}
-}
-
-function start(err, results)
-{
-	if(err){
-		console.error(err);
-		return;
-	}
-	console.log(results);
-
-	// texture the model
-	var materials = {
-		stage1: results[0][0],
-		stage2: results[0][1], 
-		controlpanel: results[0][2],
-		infoOverview: results[0][3],
-		infoFirst: results[0][4],
-		infoSecond: results[0][5],
-		infoArrow: results[0][6]
+	var roots = {
+		real_rocket: realRoot,
+		scale_rocket: scaleRoot
 	};
-	model = results[1][0];
-	// place display rocket
-	var scaleModel = model.clone();
-	scaleModel.name = 'scaleModel';
-	scaleModel.scale.set(.08, .08, .08);
-	scaleModel.position.set(0, 0, 1.6);
-	scaleModel.rotateZ(-Math.PI/2);
-	scaleModel.updateMatrix();
-	infoRoot.add(scaleModel);
 
-	addInfoPanels(materials);
+	// actually construct vignettes
+	['real_rocket', 'scale_rocket'].forEach(function(id)
+	{
+		var module = Diorama[id];
+		Diorama.loadAssets(module.assets, function(results)
+		{
+			module.initialize(roots[id], results);
+		});
+	});
 
-	addArrows(materials);
+	//addArrows(materials);
 
 	// start animating
 	window.requestAnimationFrame(function animate(timestamp)
@@ -168,36 +79,6 @@ function start(err, results)
 
 }
 
-
-function addInfoPanels(materials) 
-{
-	var overviewPanel = new THREE.Mesh(
-		new THREE.PlaneGeometry(1, 1),
-		materials.infoOverview
-	);
-	overviewPanel.position.set(1, 0, 0.5);
-	overviewPanel.rotation.set(0, 0.872, 1.57);
-	overviewPanel.scale.set(2.5, 0.7, 1);
-	infoRoot.add(overviewPanel);
-
-	var firstPanel = new THREE.Mesh(
-		new THREE.PlaneGeometry(1, 1),
-		materials.infoFirst
-	);
-	firstPanel.position.set(0, -1, 1.5);
-	firstPanel.rotation.set(1.5699, 1.5701, 0);
-	firstPanel.scale.set(1, 1.2, 1);
-	infoRoot.add(firstPanel);
-
-	var secondPanel = new THREE.Mesh(
-		new THREE.PlaneGeometry(1, 1),
-		materials.infoSecond
-	);
-	secondPanel.position.set(0, 1, 3.2);
-	secondPanel.rotation.set(3.141, 1.047, -1.5707);
-	secondPanel.scale.set(1, 1.2, 1);
-	infoRoot.add(secondPanel);
-}
 
 function addArrows(materials)
 {
