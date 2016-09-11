@@ -9,7 +9,7 @@
 		scaleModel.name = 'scaleModel';
 		scaleModel.scale.set(.08, .08, .08);
 		scaleModel.position.set(0, 0, 1.6);
-		scaleModel.rotateZ(-Math.PI/2);
+		scaleModel.rotateZ(Math.PI);
 		scaleModel.updateMatrix();
 		infoRoot.add(scaleModel);
 

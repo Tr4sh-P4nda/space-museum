@@ -40,14 +40,17 @@ function start()
 {
 	// set up full-size rocket root
 	var realRoot = new THREE.Object3D();
-	realRoot.position.set(32, -151.25, 32);
+	//realRoot.position.set(32, -151.25, 32);
+	realRoot.position.set(0, -512, 0);
 	realRoot.rotation.set(-Math.PI/2, 0, 0);
 	realRoot.scale.multiplyScalar(scaleFactor);
 	scene.add(realRoot);
 
 	// set up scale rocket root
 	var scaleRoot = new THREE.Object3D();
-	scaleRoot.position.set(-38, -176, 203);
+	window.scaleRoot = scaleRoot;
+	//scaleRoot.position.set(-38, -176, 203);
+	scaleRoot.position.set(-600, -700, 1382);
 	scaleRoot.rotation.set( -Math.PI/2, 0, 0 );
 	scaleRoot.scale.multiplyScalar(scaleFactor);
 	scene.add(scaleRoot);
