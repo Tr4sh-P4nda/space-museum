@@ -72,6 +72,7 @@
 					loader.load(url,
 						function(texture)
 						{
+							console.log('loaded texture', url);
 							// write texture to cache and payload
 							textureCache[url] = texture;
 							payload.textures[id] = textureCache[url].clone();
