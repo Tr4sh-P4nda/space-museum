@@ -10,6 +10,8 @@ if(altspace.inClient)
 	renderer = altspace.getThreeJSRenderer();
 	altspace.getEnclosure().then(function(e){
 		scaleFactor = e.pixelsPerMeter;
+		scene.userData.encl = e;
+		scene.scale.multiplyScalar(e.pixelsPerMeter);
 		start();
 	});
 }
@@ -31,6 +33,7 @@ else
 
 	// don't change scale
 	scaleFactor = 1;
+	scene.userData.enclosure = {innerWidth: 1024, innerHeight: 1024, innerDepth: 1024, pixelsPerMeter: 1024/3};
 
 	start();
 }
@@ -38,44 +41,20 @@ else
 
 function start()
 {
-	// set up full-size rocket root
-	var realRoot = new THREE.Object3D();
-	realRoot.name = 'realRoot';
-	//realRoot.position.set(32, -151.25, 32);
-	realRoot.position.set(0, -512, 0);
-	realRoot.rotation.set(-Math.PI/2, 0, 0);
-	realRoot.scale.multiplyScalar(scaleFactor);
-	scene.add(realRoot);
-
-	// set up scale rocket root
-	var scaleRoot = new THREE.Object3D();
-	scaleRoot.name = 'scaleRoot';
-	//scaleRoot.position.set(-38, -176, 203);
-	scaleRoot.position.set(-600, -700, 1382);
-	scaleRoot.rotation.set( -Math.PI/2, 0, 0 );
-	scaleRoot.scale.multiplyScalar(scaleFactor);
-	scene.add(scaleRoot);
-	
-	var arrowRoot = new THREE.Object3D();
-	arrowRoot.name = 'arrowRoot';
-	arrowRoot.position.set(0, 0, 0);
-	arrowRoot.scale.multiplyScalar(scaleFactor);
-	window.arrowRoot = arrowRoot;
-	scene.add(arrowRoot);
-
-	var roots = {
-		real_rocket: realRoot,
-		scale_rocket: scaleRoot,
-		arrows: arrowRoot
-	};
-
-	// actually construct vignettes
-	[/*'real_rocket',*/ 'scale_rocket', 'arrows'].forEach(function(id)
+	// construct vignettes
+	[
+		'real_rocket',
+		'scale_rocket',
+		'arrows'
+	].forEach(function(id)
 	{
 		var module = Diorama[id];
+		var root = new THREE.Object3D();
+		scene.add(root);
+
 		Diorama.loadAssets(module.assets, function(results)
 		{
-			module.initialize(roots[id], results);
+			module.initialize(root, results);
 		});
 	});
 

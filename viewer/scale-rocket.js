@@ -4,6 +4,10 @@
 {
 	exports.initialize = function(infoRoot, assets)
 	{
+		infoRoot.name = 'scaleRoot';
+		infoRoot.position.set(-12.98, -15.14, 29.89);
+		infoRoot.rotation.set( -Math.PI/2, 0, 0 );
+
 		// place display rocket
 		var scaleModel = assets.models.rocket;
 		scaleModel.name = 'scaleModel';

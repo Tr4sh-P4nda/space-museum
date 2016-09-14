@@ -4,26 +4,15 @@
 {
 	exports.initialize = function(root, assets)
 	{
-		console.log('adding arrows', root, assets);
-		
-		root.add( new THREE.Mesh(
-			new THREE.SphereGeometry(40, 32, 32), new THREE.MeshBasicMaterial()));
-			
+		// place root
+		root.position.set(-7.285, 14.66, -5.645);
+		root.scale.divideScalar(5.87);
+
 		var arrowMat = new THREE.MeshBasicMaterial({map: assets.textures.infoArrow});
 		arrowMat.map.wrapS = THREE.RepeatWrapping;
 		arrowMat.map.repeat.y = 5;
 		arrowMat.transparent = true;
-		arrowMat.side = THREE.DoubleSided;
-		
-		var arrows0 = new THREE.Mesh(
-			new THREE.PlaneGeometry(1, 1),
-			arrowMat
-		);
-		arrows0.name = 'arrows0';
-		arrows0.position.set(0, 0, 0);
-		arrows0.rotation.set(-1.5707962827705675, 0, -2.0943951617841434);
-		arrows0.scale.set(5, 25, 10);
-		root.add(arrows0);
+		arrowMat.side = THREE.DoubleSide;
 		
 		var arrows1 = new THREE.Mesh(
 			new THREE.PlaneGeometry(1, 1),

@@ -6,14 +6,13 @@
 
 	exports.initialize = function(root, assets)
 	{
+		root.name = 'realRoot';
+		root.position.set(0, -11.07, 0);
+		root.rotation.set(-Math.PI/2, 0, 0);
+
 		var rocket = assets.models.rocket;
 		rocket.traverse(function(o)
 		{
-			var stage1names = ['Stage1','Engines','Engine_001','Legs','Grid_Fins'];
-			var stage2names = ['Stage2','Engine_2','Fairing','Fairing_001','Payload'];
-
-			var mesh = o.getChildByType(THREE.Mesh);
-
 			switch(o.name){
 				case 'Stage1': stage1 = o; break;
 				case 'Stage2': stage2 = o; break;
