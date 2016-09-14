@@ -12,8 +12,17 @@
 		p.material = new THREE.MeshBasicMaterial({map: texture});
 		p.material.side = THREE.DoubleSide;
 		
-		var ratio = width/height;
 		p.scale.set(width, height, 1);
+
+		var ratio = width/height;
+		if(ratio > 1){
+			texture.repeat.set(1, 1/ratio);
+			texture.offset.set(0, 1-1/ratio);
+		}
+		else {
+			texture.repeat.set(1/ratio, 1);
+			texture.offset.set(0, 0);
+		}
 
 		return p;
 	}
@@ -23,7 +32,7 @@
 		root.position.set(0, -14, 30);
 
 		// add rocket equation poster
-		var poster1 = generatePoster(assets.textures.rocket_equation, 2, 2);
+		var poster1 = generatePoster(assets.textures.rocket_equation, 1.5, 1);
 		root.add(poster1);
 	}
 
