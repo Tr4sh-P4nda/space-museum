@@ -32,7 +32,10 @@
 		root.position.set(0, -14, 30);
 
 		// add rocket equation poster
-		var poster1 = generatePoster(assets.textures.rocket_equation, 1.5, 1);
+		var poster1 = generatePoster(assets.textures.rocket_equation, 2.5,2.5);
+		poster1.position.set(25, 0, -3);
+		poster1.rotation.set(0, -Math.PI/2, 0);
+		window.poster1 = poster1;
 		root.add(poster1);
 	}
 
