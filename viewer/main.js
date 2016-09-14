@@ -45,7 +45,8 @@ function start()
 	[
 		'real_rocket',
 		'scale_rocket',
-		'arrows'
+		'arrows',
+		'posters'
 	].forEach(function(id)
 	{
 		var module = Diorama[id];
