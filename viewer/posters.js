@@ -39,11 +39,23 @@
 
 		//var poster2 = generatePoster(assets.videos.landing_pov, 1.5 * 16/9, 1.5);
 		//root.add(poster2);
+
+		// add mars panorama
+		var marsBall = new THREE.Mesh(
+			new THREE.SphereGeometry(1.5, 32, 16),
+			new THREE.MeshBasicMaterial({map: assets.textures.mars_pano})
+		);
+		marsBall.material.side = THREE.BackSide;
+		marsBall.userData.altspace = {collider: {enabled: false}};
+		marsBall.position.set(22, 0.12, -3);
+		marsBall.rotation.set(0, Math.PI, 0);
+		root.add(marsBall);
 	}
 
 	exports.assets = {
 		textures: {
-			rocket_equation: 'textures/rocket-equation.png'
+			rocket_equation: 'textures/rocket-equation.png',
+			mars_pano: 'textures/mars_pano.jpg'
 		},
 		videos: {
 			//landing_pov: 'textures/landing_pov.mkv'
