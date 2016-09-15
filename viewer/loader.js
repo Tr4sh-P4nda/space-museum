@@ -2,8 +2,11 @@
 
 (function(exports)
 {
-	var modelCache = {};
-	var textureCache = {};
+	var cache = {
+		models: {},
+		textures: {},
+		videos: {}
+	};
 
 	// loads an asset manifest from a vignette
 	function loadAssets(manifest, callback)
@@ -22,8 +25,8 @@
 				var url = manifest.models[id];
 
 				// check cache for asset
-				if(modelCache[url]){
-					payload.models[id] = modelCache[url].clone();
+				if(cache.models[url]){
+					payload.models[id] = cache.models[url].clone();
 				}
 
 				// load gltf models
@@ -37,8 +40,8 @@
 					loader.load(url, function(result)
 					{
 						// write model to cache and payload
-						modelCache[url] = result.scene.children[0].children[0];
-						payload.models[id] = modelCache[url].clone();
+						cache.models[url] = result.scene.children[0].children[0];
+						payload.models[id] = cache.models[url].clone();
 
 						// finish
 						checkComplete(true);
@@ -57,8 +60,8 @@
 				var url = manifest.textures[id];
 
 				// check cache for asset
-				if(textureCache[url]){
-					payload.textures[id] = textureCache[url].clone();
+				if(cache.textures[url]){
+					payload.textures[id] = cache.textures[url].clone();
 				}
 
 				// load textures
@@ -72,10 +75,9 @@
 					loader.load(url,
 						function(texture)
 						{
-							console.log('loaded texture', url);
 							// write texture to cache and payload
-							textureCache[url] = texture;
-							payload.textures[id] = textureCache[url].clone();
+							cache.textures[url] = texture;
+							payload.textures[id] = cache.textures[url].clone();
 
 							// finish
 							checkComplete(true);
@@ -89,6 +91,62 @@
 					);
 				}
 			});
+		}
+
+		if(manifest.videos)
+		{
+			payload.videos = {};
+
+			// loop over each entry in the texture manifest
+			Object.keys(manifest.videos).forEach(function(id)
+			{
+				var url = manifest.videos[id];
+
+				// check cache for asset
+				if(cache.videos[url]){
+					payload.videos[id] = cache.videos[url].clone();
+				}
+
+				// load videos
+				else
+				{
+					// start loader
+					var vidSrc = document.createElement('video');
+					vidSrc.autoplay = true;
+					vidSrc.loop = true;
+					vidSrc.src = url;
+					vidSrc.style.display = 'none';
+					document.body.appendChild(vidSrc);
+
+					var tex = new THREE.VideoTexture(vidSrc);
+					tex.minFilter = THREE.LinearFilter;
+					tex.magFilter = THREE.LinearFilter;
+					tex.format = THREE.RGBFormat;
+
+					cache.videos[url] = tex;
+					payload.videos[id] = cache.videos[url];
+
+					/*var loader = new THREE.TextureLoader();
+					loader.load(url,
+						function(texture)
+						{
+							// write texture to cache and payload
+							cache.videos[url] = texture;
+							payload.videos[id] = cache.videos[url].clone();
+
+							// finish
+							checkComplete(true);
+						},
+						null,
+						function(err)
+						{
+							console.error(err);
+							checkComplete(true);
+						}
+					);*/
+				}
+			});
+
 		}
 
 		checkComplete();

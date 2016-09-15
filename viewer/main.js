@@ -24,8 +24,8 @@ else
 	document.body.appendChild(renderer.domElement);
 
 	camera = new THREE.PerspectiveCamera(90, 1, 0.01, 10000);
-	camera.position.set(0, -10, 1.5);
-	camera.rotation.set(2.15, 0, 0);
+	camera.position.set(0, -10, 20);
+	camera.rotation.set(0, Math.PI, 0);
 	scene.add(camera);
 
 	// set up cursor emulation
