@@ -46,9 +46,10 @@
 			new THREE.MeshBasicMaterial({map: assets.textures.mars_pano})
 		);
 		marsBall.material.side = THREE.BackSide;
+		marsBall.material.map.wrapS = THREE.RepeatWrapping;
+		marsBall.material.map.offset.setX(0.5);
 		marsBall.userData.altspace = {collider: {enabled: false}};
 		marsBall.position.set(22, 0.12, -3);
-		marsBall.rotation.set(0, Math.PI, 0);
 		root.add(marsBall);
 	}
 
