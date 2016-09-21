@@ -27,7 +27,7 @@
 		return p;
 	}
 
-	exports.initialize = function(root, assets)
+	exports.initialize = function(env, root, assets)
 	{
 		root.position.set(0, -14, 30);
 

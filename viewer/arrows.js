@@ -2,7 +2,7 @@
 
 (function(exports)
 {
-	exports.initialize = function(root, assets)
+	exports.initialize = function(env, root, assets)
 	{
 		// place root
 		root.position.set(-7.285, 14.66, -5.645);

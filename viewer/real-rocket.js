@@ -4,7 +4,7 @@
 {
 	var stage1, stage2, fairing1, fairing2, model;
 
-	exports.initialize = function(root, assets)
+	exports.initialize = function(env, root, assets)
 	{
 		root.name = 'realRoot';
 		root.position.set(0, -11.07, 0);
@@ -21,6 +21,8 @@
 			}
 		});
 		model = rocket;
+
+		console.log('rocket:', rocket);
 
 		// place rocket
 		rocket.translateZ(22);

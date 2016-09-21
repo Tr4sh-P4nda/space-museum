@@ -2,7 +2,7 @@
 
 (function(exports)
 {
-	exports.initialize = function(infoRoot, assets)
+	exports.initialize = function(env, infoRoot, assets)
 	{
 		infoRoot.name = 'scaleRoot';
 		infoRoot.position.set(-12.98, -15.14, 29.89);
