@@ -10,6 +10,7 @@
 
 		var arrowMat = new THREE.MeshBasicMaterial({map: assets.textures.infoArrow});
 		arrowMat.map.wrapT = THREE.RepeatWrapping;
+		arrowMat.map.wrapS = THREE.RepeatWrapping;
 		arrowMat.map.repeat.y = 5;
 		arrowMat.transparent = true;
 		arrowMat.side = THREE.DoubleSide;
@@ -18,6 +19,7 @@
 			new THREE.PlaneGeometry(1, 1),
 			arrowMat
 		);
+		arrows1.userData.altspace = {collider: {enabled: false}};
 		arrows1.name = 'arrows1';
 		arrows1.position.set(0, -176.4, 170);
 		arrows1.rotation.set(-1.5707962827705675, 0, -2.0943951617841434);
@@ -28,6 +30,7 @@
 			new THREE.PlaneGeometry(1, 1),
 			arrowMat
 		);
+		arrows2.userData.altspace = {collider: {enabled: false}};
 		arrows2.name = 'arrows2';
 		arrows2.position.set(35, -176.2, 172);
 		arrows2.rotation.set(-1.5707963484304415, 3.8192581541807165e-8, 0);
@@ -38,6 +41,7 @@
 			new THREE.PlaneGeometry(1, 1),
 			arrowMat
 		);
+		arrows3.userData.altspace = {collider: {enabled: false}};
 		arrows3.name = 'arrows3';
 		arrows3.position.set(60, -166.3, 135);
 		arrows3.rotation.set(-1.5707962886023292, 2.163553780576422e-8, -1.570796395844246);
@@ -48,6 +52,7 @@
 			new THREE.PlaneGeometry(1, 1),
 			arrowMat
 		);
+		arrows4.userData.altspace = {collider: {enabled: false}};
 		arrows4.name = 'arrows4';
 		arrows4.position.set(110, -161.1, 135);
 		arrows4.rotation.set(-1.5707962900545052, -0.3490657666126316, -1.5707964138930883);
@@ -58,6 +63,7 @@
 			new THREE.PlaneGeometry(1, 1),
 			arrowMat
 		);
+		arrows5.userData.altspace = {collider: {enabled: false}};
 		arrows5.name = 'arrows5';
 		arrows5.position.set(110, -151.1, 118);
 		arrows5.rotation.set(-1.5707963561444291, -1.2774839319718047e-7, 1.5707963267948966);
@@ -68,6 +74,7 @@
 			new THREE.PlaneGeometry(1, 1),
 			arrowMat
 		);
+		arrows6.userData.altspace = {collider: {enabled: false}};
 		arrows6.name = 'arrows6';
 		arrows6.position.set(75, -151.1, 113);
 		arrows6.rotation.set(-1.570796394526992, -1.0028011132590126e-7, 1.2217304725064826);

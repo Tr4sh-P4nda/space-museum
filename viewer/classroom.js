@@ -34,7 +34,7 @@
 		//root.add( new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial()) );
 
 		// add rocket equation poster
-		window.poster1 = generatePoster(assets.textures.rocket_equation, 2.5,2.5);
+		var poster1 = generatePoster(assets.textures.rocket_equation, 2.5,2.5);
 		poster1.position.set(0, 0, -3.1);
 		poster1.rotation.set(0, 0, 0);
 		root.add(poster1);
