@@ -63,4 +63,4 @@
 		}
 	};
 
-})(window.Diorama.posters = window.Diorama.posters || {});
+})(window.posters = window.posters || {});

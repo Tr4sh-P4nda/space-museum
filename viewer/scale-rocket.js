@@ -57,4 +57,4 @@
 		}
 	};
 
-})(window.Diorama.scale_rocket = window.Diorama.scale_rocket || {});
+})(window.scale_rocket = window.scale_rocket || {});

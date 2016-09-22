@@ -197,4 +197,4 @@
 		}
 	};
 
-})(window.Diorama.real_rocket = window.Diorama.real_rocket || {});
+})(window.real_rocket = window.real_rocket || {});

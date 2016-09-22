@@ -9,7 +9,7 @@
 		root.scale.divideScalar(5.87);
 
 		var arrowMat = new THREE.MeshBasicMaterial({map: assets.textures.infoArrow});
-		arrowMat.map.wrapS = THREE.RepeatWrapping;
+		arrowMat.map.wrapT = THREE.RepeatWrapping;
 		arrowMat.map.repeat.y = 5;
 		arrowMat.transparent = true;
 		arrowMat.side = THREE.DoubleSide;
@@ -81,4 +81,4 @@
 		}
 	};
 	
-})(window.Diorama.arrows = window.Diorama.arrows || {});
+})(window.arrows = window.arrows || {});
