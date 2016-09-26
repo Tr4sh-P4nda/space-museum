@@ -14,7 +14,7 @@ window.memorial = {
 			new THREE.PlaneGeometry(2.5,2.5),
 			new THREE.MeshBasicMaterial({map: assets.textures.wall})
 		);
-		poster.position.set(0,0,-2);
+		poster.position.set(0,0,-1);
 		window.memorial = poster;
 		root.add(poster);
 	},
