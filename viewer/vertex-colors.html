@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.js"></script>
+		<script src="http://sdk.altvr.com/libs/altspace.js/0.18.2/altspace.min.js"></script>
+		<script src="https://rawgit.com/stevenvergenz/altspace-diorama/master/dist/diorama.min.js"></script>
+		<script src="ColladaLoader.js"></script>
+	</head>
+	<body>
+		<script>
+			var diorama = new Diorama();
+			diorama.start({
+				initialize: function(env, root, assets)
+				{
+					root.position.setY(-0.5);
+					root.rotateX(-Math.PI/2);
+					
+					assets.textures.earth.wrapS = THREE.RepeatWrapping;
+					assets.textures.earth.wrapT = THREE.RepeatWrapping;
+					
+					var globe = assets.models.globe;
+					globe.children[0].material = new THREE.MeshBasicMaterial({
+						vertexColors: THREE.VertexColors,
+						map: assets.textures.earth
+					});
+					root.add(globe);
+					
+					globe.children[0].addBehavior({
+						awake: function(obj){
+							this.target = obj;
+						},
+						update: function(deltaT){
+							this.target.material.map.offset.x += .00002*deltaT;
+						}
+					});
+				},
+				assets: {
+					models: {
+						globe: '../models/earth.dae'
+					},
+					textures: {
+						earth: '../textures/earth.jpg'
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
