@@ -17,6 +17,14 @@
 	</head>
 	<body>
 		<script>
+			// place the dioramas around the room
+			real_rocket.position = {x: 0, y: -11.07, z: 0};
+			scale_rocket.position = {x: -12.98, y: -15.14, z: 29.89};
+			arrows.position = {x: -7.285, y: 14.66, z: -5.645};
+			panorama.position = {x: 22, y: -13.88, z: 27};
+			classroom.position = {x: 23, y: -9.5, z: 17};
+			memorial.position = {x: 14, y: -14, z: 19};
+
 			var diorama = new Diorama({gridOffset: new THREE.Vector3(0,-20,0)});
 			diorama.start(real_rocket, scale_rocket, arrows, panorama, classroom, memorial);
 		</script>

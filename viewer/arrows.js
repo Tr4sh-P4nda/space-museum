@@ -5,7 +5,6 @@
 	exports.initialize = function(env, root, assets)
 	{
 		// place root
-		root.position.set(-7.285, 14.66, -5.645);
 		root.scale.divideScalar(5.87);
 
 		var arrowMat = new THREE.MeshBasicMaterial({map: assets.textures.infoArrow});

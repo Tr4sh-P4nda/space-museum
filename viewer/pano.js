@@ -8,8 +8,6 @@
 
 	exports.initialize = function(env, root, assets)
 	{
-		root.position.set(22, -13.88, 27);
-
 		// add mars panorama
 		var marsBall = new THREE.Mesh(
 			new THREE.SphereGeometry(1.5, 32, 16),

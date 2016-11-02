@@ -7,7 +7,6 @@
 	exports.initialize = function(env, root, assets)
 	{
 		root.name = 'realRoot';
-		root.position.set(0, -11.07, 0);
 		root.rotation.set(-Math.PI/2, 0, 0);
 
 		var rocket = assets.models.rocket;

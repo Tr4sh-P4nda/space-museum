@@ -29,8 +29,6 @@
 
 	exports.initialize = function(env, root, assets)
 	{
-		root.position.set(23, -9.5, 17);
-
 		//root.add( new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial()) );
 
 		// add rocket equation poster
