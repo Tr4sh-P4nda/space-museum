@@ -8,7 +8,7 @@
 		<script src="viewer/behaviors.js"></script>
 		<script src="viewer/utils.js"></script>
 
-		<script src="https://rawgit.com/stevenvergenz/altspace-diorama/master/dist/diorama.min.js"></script>
+		<script src="https://cdn.rawgit.com/stevenvergenz/altspace-diorama/v1.0.0/dist/diorama.min.js"></script>
 		<script src="viewer/real-rocket.js"></script>
 		<script src="viewer/scale-rocket.js"></script>
 		<script src="viewer/arrows.js"></script>
@@ -19,12 +19,12 @@
 	<body>
 		<script>
 			// place the dioramas around the room
-			real_rocket.position = {x: 0, y: -11.07, z: 0};
-			scale_rocket.position = {x: -12.98, y: -15.14, z: 29.89};
-			arrows.position = {x: -7.285, y: 14.66, z: -5.645};
-			panorama.position = {x: 22, y: -13.88, z: 27};
-			classroom.position = {x: 23, y: -9.5, z: 17};
-			memorial.position = {x: 14, y: -14, z: 19};
+			real_rocket.position = [0, -11.07, 0];
+			scale_rocket.position = [-12.98, -15.14, 29.89];
+			arrows.position = [-7.285, 14.66, -5.645];
+			panorama.position = [22, -13.88, 27];
+			classroom.position = [23, -9.5, 17];
+			memorial.position = [14, -14, 19];
 
 			var diorama = new Diorama({gridOffset: new THREE.Vector3(0,-20,0)});
 			diorama.start(real_rocket, scale_rocket, arrows, panorama, classroom, memorial);
