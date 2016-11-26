@@ -8,25 +8,16 @@
 		<script src="viewer/behaviors.js"></script>
 		<script src="viewer/utils.js"></script>
 
-		<!--script src="https://cdn.rawgit.com/stevenvergenz/altspace-diorama/v1.0.0/dist/diorama.min.js"></script-->
-		<script src="../altspace-diorama/dist/diorama.js"></script>
+		<script src="https://cdn.rawgit.com/stevenvergenz/altspace-diorama/v1.1.0/dist/diorama.min.js"></script>
+		<!--script src="../altspace-diorama/dist/diorama.js"></script-->
 		<script src="viewer/realrocket.js"></script>
 		<script src="viewer/staticobjects.js"></script>
-		<!--script src="viewer/arrows.js"></script>
-		<script src="viewer/pano.js"></script>
-		<script src="viewer/classroom.js"></script>
-		<script src="viewer/memorial.js"></script-->
 	</head>
 	<body>
 		<script>
 			var diorama = new Diorama({gridOffset: [0,-20,0], fullspace: true});
 			RealRocket.position = [-10, 4.2, -27.5];
 			StaticObjects.position = [0,0,0];
-			/*scale_rocket.position = [-12.98, -15.14, 29.89];
-			arrows.position = [-7.285, 14.66, -5.645];
-			panorama.position = [22, -13.88, 27];
-			classroom.position = [23, -9.5, 17];
-			memorial.position = [14, -14, 19];*/
 
 			diorama.start(RealRocket, StaticObjects);
 		</script>
