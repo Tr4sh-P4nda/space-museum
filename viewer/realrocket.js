@@ -21,14 +21,11 @@
 		});
 		model = rocket;
 
-		console.log('rocket:', rocket);
-
 		// place rocket
 		rocket.translateZ(22);
 		rocket.rotateZ(-Math.PI/2);
 		rocket.updateMatrix();
 		root.add(rocket);
-
 
 		// place panel
 		var controls = assets.models.controlpanel;
@@ -196,4 +193,4 @@
 		}
 	};
 
-})(window.real_rocket = window.real_rocket || {});
+})(window.RealRocket = window.RealRocket || {});
