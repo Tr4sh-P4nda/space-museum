@@ -4,3 +4,10 @@ Legs:		 942px	11.29m
 Interstage:	1645px	19.71m
 Stage 2:	 578px	 6.93m
 Fairing:	1067px	12.79m
+
+Recomputation:   hgt     diam
+Fairing:      13.10m x 5.182m
+Stage 2:       9.00m x 3.660m
+Interstage:    6.79m x 3.660m
+Stage 1:      41.46m x 3.660m
+Total height: 70.00m
